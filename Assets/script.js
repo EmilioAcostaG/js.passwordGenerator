@@ -15,43 +15,74 @@ function writePassword() {
     var numbers = ["0", "1", "3", "4", "5", "6", "7", "8", "9"];
     var specialChar = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"]
     var list = [] // this is where the characters that make up the password will be added to
+    var noSelection = []
 
     // to define length of password
     var numOfCharacters = prompt("How many characters would you like to include in your password? Please enter at leaset 8 and no more than 128 characters.");
 
     // will cancel prompt if left blank
-    if (numOfCharacters === null) {
-      return "No Password Generated" //why is it still saying undefined
+    if (numOfCharacters === "") {
+      
+      return "No Password Generated" 
     }
+
+
+    //if(Object.values(numOfCharacters) !== "number" ) {
+      
+     // alert ("The number of characters entered is not an option. \nPlease enter a different number of characters.");
+     // return "No Password Generated"
+    //}
+
+
 
     // will tell user to enter new number if a 0 or number greater than 128 is entered
-    if (numOfCharacters < 8 || numOfCharacters > 128) {
-      alert ("The numer of characters entered is not an option. \nPlease enter a different number of characters.")
+     if (numOfCharacters < 8 || numOfCharacters > 128) {
+      alert ("The number of characters entered is not an option. \nPlease enter a different number of characters.")
+      return "No Password Generated"
+      
     }
 
-    //otherwise, following will as to confirm for password criteria.
+
+    //the following will ask to confirm to include in password criteria.
     // nothing extra needed for false, simply means not to include in password
     else {
       var lowerCase = confirm("Click OK if you would like to include lowercase letters.");
-
-       if (lowerCase === true) {
+      if (lowerCase === true) {
         list = list.concat(letters);
       }
+        if (lowerCase === false) {
+          noSelection = noSelection.concat(letters);
+        }
 
       var upper = confirm("Click OK if you would like to include uppercase letters.");
       if (upper === true) {
         list = list.concat(upperCase);
       }
+        if (upper === false) {
+          noSelection = noSelection.concat(upper);
+        }
+
 
       var numeric = confirm("Click OK if you would like to include numeric characters.");
       if (numeric === true) {
         list = list.concat(numbers);
       }
+        if (numeric === false) {
+          noSelection = noSelection.concat(numeric);
+        }
 
       var specials = confirm("Click OK if you would like to include special characters in your password.");
       if (specials === true) {
         list = list.concat(specialChar);
       }
+        if (specials === false){
+          noSelection = noSelection.concat(specials);
+        }
+
+        if (noSelection = false) {
+          return "Please make a selection for password."
+        }
+
 
       var charList = []
 
@@ -66,6 +97,7 @@ function writePassword() {
   }
 
       return charList
+      
 
     }
     
